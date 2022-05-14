@@ -3,12 +3,17 @@ import EmployeesListItem from "../employees-list-item/employees-list-item";
 import './employees-list.css';
 
 const EmployeesList = (props) => {
-    let {data} = props;
+    let {data, onToggleIncrease} = props;
     let elements = data.map((item) => {
-        const {...itemProps} = item;
+        const {id , ...itemProps} = item;
 
         return(
-            <EmployeesListItem {...itemProps}/>
+            <EmployeesListItem 
+            key={id}
+            onToggleIncrease={() =>{
+                onToggleIncrease(id)
+            }}  
+            {...itemProps}/>
         )
     })
 
