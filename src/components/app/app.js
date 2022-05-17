@@ -12,27 +12,26 @@ class App extends Component{
     super(props)
     this.state = {
       data: [
-        {id: 1, name: 'Durbek', salary: 2000, increase: true},
-        {id: 2, name: 'Qahramon', salary: 2500, increase: false},
-        {id: 3, name: 'Lazizbek', salary: 2000, increase: false},
-        {id: 4, name: 'Muhammad', salary: 1500, increase: false}
+        {id: 1, name: 'Durbek', salary: 2000},
+        {id: 2, name: 'Qahramon', salary: 2500},
+        {id: 3, name: 'Lazizbek', salary: 2000},
+        {id: 4, name: 'Muhammad', salary: 1500}
       ]
     } 
   }
 
-  onToggleIncrease = (id) =>{
+  deleteItem = (id) => {
     this.setState(({data}) => {
-      return {
-        data: data.map((item) => {
-          if(item.id === id){
-            return{ ...item, increase: !item.increase }
-          }
-          return item;
-        })
-      }
-    }
+      // const index = data.findIndex(elem => elem.id === id)
       
-    )
+      // const before = data.slice(0, index);
+      // const after = data.slice(index + 1);
+
+      // let newArr = [...before, ...after]
+      return{
+        data: data.filter((item) => item.id !== id)
+      }
+    })
   }
   
   render(){
@@ -45,8 +44,9 @@ class App extends Component{
               <AppFilter/>
           </div>
           
-          <EmployeesList data={this.state.data}
-            onToggleIncrease={this.onToggleIncrease}
+          <EmployeesList 
+            data={this.state.data}
+            onDelete={this.deleteItem}
           />
           <EmployeesAddForm/>
       </div>
